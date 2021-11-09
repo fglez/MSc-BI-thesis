@@ -125,22 +125,3 @@ mkdir checkm/
 checkm taxonomy_wf domain Bacteria -t 8 -x fa metabat/ checkm/
 
 EOF
-
-cat > 7mtphln-${prefix}.sh << EOF
-#PBS -q default
-#PBS -l nodes=1:ppn=16,walltime=9:59:59,vmem=32gb,mem=32gb
-#PBS -N metaphlan${prefix}
-#PBS -V
-#PBS -o 7mtphln${prefix}.out
-#PBS -e 7mtphln${prefix}.err
-
-cd $path
-
-module load metaphlan2/2.7.7 bowtie2/2.3.5.1
- 
-mkdir metaphlan/
-
-metaphlan2.py  CLEAN_${prefix}_merged.fa --input_type fasta --nproc 16 --ignore_viruses --ignore_eukaryotes > metaphlan/${prefix}_mtphln_prfl.txt
-
-EOF
-
